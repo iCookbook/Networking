@@ -45,6 +45,7 @@
 		F01C27F4290EB6DD0060B60B /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		F01C27F5290EB6DD0060B60B /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		F01C27F6290EB6DD0060B60B /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		F01C2801290EB9220060B60B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 		F01C27A9290EB5BF0060B60B = {
 			isa = PBXGroup;
 			children = (
+				F01C2801290EB9220060B60B /* README.md */,
 				F01C27B5290EB5BF0060B60B /* Networking */,
 				F01C27C1290EB5C00060B60B /* NetworkingTests */,
 				F01C27B4290EB5BF0060B60B /* Products */,
