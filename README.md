@@ -1,2 +1,3 @@
 # Networking
-Networking layer of the project
+
+Layer responsible for all network of the application.
