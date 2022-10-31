@@ -14,7 +14,7 @@ public protocol NetworkManagerProtocol {
     func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void)
 }
 
-/// Allows to download data from the Internet
+/// Class responsible for networking.
 public final class NetworkManager: NetworkManagerProtocol {
     
     // MARK: - Public Properties
@@ -38,8 +38,8 @@ public final class NetworkManager: NetworkManagerProtocol {
     
     /// Performs getting data from the Internet and then decoding it with provided generic-type.
     /// - Parameters:
-    ///   - request: instance of `NetworkRequest` that has endpoint and type-safe HTTP-method and -headers for a request.
-    ///   - completion: completion handler that has `Result` enum with `Model` (success) and `NetworkManagerError` (failure) paratemets.
+    ///   - request: instance of ``NetworkRequest`` that has endpoint and type-safe HTTP-method and -headers for a request.
+    ///   - completion: completion handler that has `Result` enum with `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
     public func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
         
         guard let url = request.endpoint.url else {

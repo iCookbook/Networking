@@ -16,7 +16,9 @@ public struct NetworkRequest {
     /// Type-safe HTTP headers.
     var httpHeaderFields: [HTTPHeader] = []
     /// The timeout interval of the request.
-    var timeoutInterval: TimeInterval = 3
+    var timeoutInterval: TimeInterval = 5
+    
+    // MARK: - Init
     
     public init(endpoint: Endpoint, method: HTTPMethod = .get, httpHeaderFields: [HTTPHeader] = [], timeoutInterval: TimeInterval = 3) {
         self.endpoint = endpoint

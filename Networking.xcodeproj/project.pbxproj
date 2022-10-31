@@ -19,6 +19,8 @@
 		F01C27FC290EB6DD0060B60B /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C27F4290EB6DD0060B60B /* HTTPMethod.swift */; };
 		F01C27FD290EB6DD0060B60B /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C27F5290EB6DD0060B60B /* HTTPHeader.swift */; };
 		F01C27FE290EB6DD0060B60B /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C27F6290EB6DD0060B60B /* HTTPStatusCode.swift */; };
+		F062D424290FBC27005EA844 /* Models.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F062D423290FBC27005EA844 /* Models.framework */; };
+		F062D425290FBC27005EA844 /* Models.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F062D423290FBC27005EA844 /* Models.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,20 @@
 			remoteInfo = Networking;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F062D426290FBC27005EA844 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F062D425290FBC27005EA844 /* Models.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F01C27B3290EB5BF0060B60B /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +62,7 @@
 		F01C27F5290EB6DD0060B60B /* HTTPHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 		F01C27F6290EB6DD0060B60B /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		F01C2801290EB9220060B60B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F062D423290FBC27005EA844 /* Models.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Models.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F062D424290FBC27005EA844 /* Models.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +92,7 @@
 				F01C27B5290EB5BF0060B60B /* Networking */,
 				F01C27C1290EB5C00060B60B /* NetworkingTests */,
 				F01C27B4290EB5BF0060B60B /* Products */,
+				F062D422290FBC27005EA844 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,13 +108,13 @@
 		F01C27B5290EB5BF0060B60B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				F01C27B7290EB5BF0060B60B /* Networking.docc */,
 				F01C27EF290EB6DD0060B60B /* Endpoints */,
 				F01C27F3290EB6DD0060B60B /* HTTPConstants */,
 				F01C27ED290EB6DD0060B60B /* NetworkManager.swift */,
 				F01C27EE290EB6DD0060B60B /* NetworkManagerError.swift */,
 				F01C27F2290EB6DD0060B60B /* NetworkRequest.swift */,
 				F01C27B6290EB5BF0060B60B /* Networking.h */,
-				F01C27B7290EB5BF0060B60B /* Networking.docc */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -127,6 +146,14 @@
 			path = HTTPConstants;
 			sourceTree = "<group>";
 		};
+		F062D422290FBC27005EA844 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F062D423290FBC27005EA844 /* Models.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -149,6 +176,7 @@
 				F01C27AF290EB5BF0060B60B /* Sources */,
 				F01C27B0290EB5BF0060B60B /* Frameworks */,
 				F01C27B1290EB5BF0060B60B /* Resources */,
+				F062D426290FBC27005EA844 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -5,7 +5,7 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
-/// Type-safe HTTP-status codes
+/// Type-safe HTTP-status codes.
 enum HTTPStatusCode: Int {
     case unknown = -1
     
