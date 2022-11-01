@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F01C27B8290EB5BF0060B60B /* Networking.docc in Sources */ = {isa = PBXBuildFile; fileRef = F01C27B7290EB5BF0060B60B /* Networking.docc */; };
 		F01C27BE290EB5C00060B60B /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01C27B3290EB5BF0060B60B /* Networking.framework */; };
 		F01C27C3290EB5C00060B60B /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C27C2290EB5C00060B60B /* NetworkingTests.swift */; };
 		F01C27C4290EB5C00060B60B /* Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = F01C27B6290EB5BF0060B60B /* Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,7 +49,6 @@
 /* Begin PBXFileReference section */
 		F01C27B3290EB5BF0060B60B /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01C27B6290EB5BF0060B60B /* Networking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Networking.h; sourceTree = "<group>"; };
-		F01C27B7290EB5BF0060B60B /* Networking.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Networking.docc; sourceTree = "<group>"; };
 		F01C27BD290EB5C00060B60B /* NetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01C27C2290EB5C00060B60B /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		F01C27ED290EB6DD0060B60B /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 		F01C27B5290EB5BF0060B60B /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				F01C27B7290EB5BF0060B60B /* Networking.docc */,
 				F01C27EF290EB6DD0060B60B /* Endpoints */,
 				F01C27F3290EB6DD0060B60B /* HTTPConstants */,
 				F01C27ED290EB6DD0060B60B /* NetworkManager.swift */,
@@ -267,7 +264,6 @@
 				F01C27F7290EB6DD0060B60B /* NetworkManager.swift in Sources */,
 				F01C27F8290EB6DD0060B60B /* NetworkManagerError.swift in Sources */,
 				F01C27FC290EB6DD0060B60B /* HTTPMethod.swift in Sources */,
-				F01C27B8290EB5BF0060B60B /* Networking.docc in Sources */,
 				F01C27FD290EB6DD0060B60B /* HTTPHeader.swift in Sources */,
 				F01C27F9290EB6DD0060B60B /* APIEndpoints.swift in Sources */,
 				F01C27FE290EB6DD0060B60B /* HTTPStatusCode.swift in Sources */,
