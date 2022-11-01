@@ -5,8 +5,6 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
-import Foundation
-
 public protocol NetworkManagerProtocol {
     /// Defined to allow the using object to change the session configuration
     var session: URLSession { get set }
@@ -74,6 +72,31 @@ public final class NetworkManager: NetworkManagerProtocol {
             }
             
             completion(.success(model.self))
+        })
+        dataTask.resume()
+    }
+    
+    /// Gets data from provided URL.
+    /// - Parameters:
+    ///   - urlString: simple string url.
+    ///   - completion: completion handler that has `Result` enum with `Data` (success) and ``NetworkManagerError`` (failure) paratemets.
+    public func obtainData(by urlString: String, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
+        
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NetworkManagerError.invalidURL))
+            return
+        }
+        
+        let urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 2)
+        
+        let dataTask = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            
+            guard error == nil, let data = data else {
+                completion(.failure(NetworkManagerError.networkError(error!))) // we are sure error != nil
+                return
+            }
+            
+            completion(.success(data))
         })
         dataTask.resume()
     }
