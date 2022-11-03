@@ -41,7 +41,6 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		7F4F067A4316F65EE8A8130A /* Pods-Networking_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking_Example.release.xcconfig"; path = "../../../../Pods/Target Support Files/Pods-Networking_Example/Pods-Networking_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A5C0848FBB26E11656958FC0 /* Pods_Networking_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Networking_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAFD388B11DE64EAF1BA13CA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D5983CC95B3E9460E97D52DF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,7 +137,6 @@
 			children = (
 				00A431660E0AD9547E1FF6F5 /* Networking.podspec */,
 				D5983CC95B3E9460E97D52DF /* README.md */,
-				BAFD388B11DE64EAF1BA13CA /* LICENSE */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
