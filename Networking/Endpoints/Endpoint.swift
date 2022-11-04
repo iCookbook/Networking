@@ -8,7 +8,7 @@
 import Foundation
 
 /// An endpoint is an access to a route by a separate HTTP method. The endpoint performs a specific task, accepts parameters and returns data to the Client.
-public struct Endpoint {
+public struct Endpoint: EndpointProtocol {
     /// Application ID of the API.
     static let appId = "d6544fa1"
     /// API key/token.
@@ -20,7 +20,7 @@ public struct Endpoint {
     var paratemets: [String: String] = [:]
     
     /// Property that computes the `url` of the instance.
-    var url: URL? {
+    public var url: URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.edamam.com"

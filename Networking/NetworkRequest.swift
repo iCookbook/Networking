@@ -10,7 +10,7 @@ import Foundation
 /// Defines network request.
 public struct NetworkRequest {
     /// Endpoint for request.
-    var endpoint: Endpoint
+    var endpoint: EndpointProtocol
     /// Type-safe HTTP method.
     var method: HTTPMethod = .get
     /// Type-safe HTTP headers.
@@ -20,7 +20,7 @@ public struct NetworkRequest {
     
     // MARK: - Init
     
-    public init(endpoint: Endpoint, method: HTTPMethod = .get, httpHeaderFields: [HTTPHeader] = [], timeoutInterval: TimeInterval = 3) {
+    public init(endpoint: EndpointProtocol, method: HTTPMethod = .get, httpHeaderFields: [HTTPHeader] = [], timeoutInterval: TimeInterval = 3) {
         self.endpoint = endpoint
         self.method = method
         self.httpHeaderFields = httpHeaderFields
