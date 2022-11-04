@@ -8,11 +8,11 @@
 import Models
 
 /// Here you can see endpoints for current API - _"Edamam API"_
-extension Endpoint {
+public extension Endpoint {
     /// Endpoint for 20 random recipes.
     /// Random is done on random choosing keyword that is required for this API. So, it is not impossible to get true random recipes.
     /// - Returns: `Endpoint` instance
-    public static func random() -> Self {
+    static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
                                      "app_id": appId,
@@ -24,7 +24,7 @@ extension Endpoint {
     /// Creates endpoint with provided keyword
     /// - Parameter keyword: keyword to find (required)
     /// - Returns: `Endpoint` instance
-    public static func create(by keyword: String) -> Self {
+    static func create(by keyword: String) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
                                      "app_id": appId,
@@ -41,7 +41,7 @@ extension Endpoint {
     ///   - cuisines: world cuisines
     ///   - dishes: dish types
     /// - Returns: `Endpoint` instance
-    public static func create(by keyword: String, meals: [Meal] = [], diets: [Diet] = [], cuisines: [Cuisine] = [], dishes: [Dish] = []) -> Self {
+    static func create(by keyword: String, meals: [Meal] = [], diets: [Diet] = [], cuisines: [Cuisine] = [], dishes: [Dish] = []) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
                                      "app_id": appId,

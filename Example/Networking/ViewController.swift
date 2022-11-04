@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Models
 import Networking
 
 class ViewController: UIViewController {
@@ -26,7 +25,7 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let request = NetworkRequest(endpoint: Endpoint.random())
-        networkManager.perform(request: request) { [unowned self] (result: Result<Response, NetworkManagerError>) in
+        networkManager.getResponse(request: request) { [unowned self] (result) in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

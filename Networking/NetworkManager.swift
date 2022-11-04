@@ -5,25 +5,21 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
+import Models
+
 public protocol NetworkManagerProtocol {
-    /// Defined to allow the using object to change the session configuration
-    var session: URLSession { get set }
-    /// Main method to perform getting data
-    func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void)
+    func getResponse(request: NetworkRequest, completion: @escaping (Result<Response, NetworkManagerError>) -> Void)
 }
 
 /// Class responsible for networking.
 public final class NetworkManager: NetworkManagerProtocol {
     
-    // MARK: - Public Properties
-    
-    /// API for networking. It is public for making this property editable from the outside.
-    public var session: URLSession
-    
     // MARK: - Private Properties
     
     /// An object that decodes instances of a data type from JSON objects
     private let decoder: JSONDecoder
+    /// API for networking. It is public for making this property editable from the outside.
+    private var session: URLSession
     
     // MARK: - Init
     
@@ -32,13 +28,11 @@ public final class NetworkManager: NetworkManagerProtocol {
         self.decoder = decoder
     }
     
-    // MARK: - Public Methods
-    
     /// Performs getting data from the Internet and then decoding it with provided generic-type.
     /// - Parameters:
     ///   - request: instance of ``NetworkRequest`` that has endpoint and type-safe HTTP-method and -headers for a request.
     ///   - completion: completion handler that has `Result` enum with `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
-    public func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
+    func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
         
         guard let url = request.endpoint.url else {
             completion(.failure(NetworkManagerError.invalidURL))
@@ -75,6 +69,8 @@ public final class NetworkManager: NetworkManagerProtocol {
         })
         dataTask.resume()
     }
+    
+    // MARK: - Public Methods
     
     /// Gets data from provided URL.
     /// - Parameters:

@@ -5,14 +5,26 @@
 //  Created by Егор Бадмаев on 04.11.2022.
 //
 
+/// The main task for endpoint is to provide url
 public protocol EndpointProtocol {
+    /// Endpoint's url for request.
     var url: URL? { get }
 }
 
+/// Endpoint with provided (custom) url.
 public struct URLEndpoint: EndpointProtocol {
+    /// Custom url.
     let urlString: String
+    
+    // MARK: - Public Properties
     
     public var url: URL? {
         URL(string: urlString)
+    }
+    
+    // MARK: - Init
+    
+    public init(urlString: String) {
+        self.urlString = urlString
     }
 }
