@@ -20,7 +20,7 @@ public struct NetworkRequest {
     
     // MARK: - Init
     
-    public init(endpoint: EndpointProtocol, method: HTTPMethod = .get, httpHeaderFields: [HTTPHeader] = [], timeoutInterval: TimeInterval = 3) {
+    public init(endpoint: EndpointProtocol, method: HTTPMethod = .get, httpHeaderFields: [HTTPHeader] = [], timeoutInterval: TimeInterval = 5) {
         self.endpoint = endpoint
         self.method = method
         self.httpHeaderFields = httpHeaderFields
