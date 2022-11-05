@@ -84,7 +84,7 @@ public final class NetworkManager: NetworkManagerProtocol {
             return
         }
         
-        let urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 3)
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 3)
         
         let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
             
