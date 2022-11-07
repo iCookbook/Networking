@@ -8,6 +8,9 @@
 import Models
 
 public protocol NetworkManagerProtocol {
+    /// Provides ``Reponse`` from the server.
+    ///
+    /// This method is implemented in `API/APIRequests.swift`
     func getResponse(request: NetworkRequest, completion: @escaping (Result<Response, NetworkManagerError>) -> Void)
 }
 
@@ -18,8 +21,8 @@ public final class NetworkManager: NetworkManagerProtocol {
     
     /// An object that decodes instances of a data type from JSON objects
     private let decoder: JSONDecoder
-    /// API for networking. It is public for making this property editable from the outside.
-    private var session: URLSession
+    /// An object that coordinates a group of related, network data transfer tasks.
+    private let session: URLSession
     
     // MARK: - Init
     
