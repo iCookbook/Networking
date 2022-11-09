@@ -7,7 +7,7 @@
 
 import Models
 
-/// Here you can see endpoints for current API - _"Edamam API"_
+/// Here you can see endpoints for current API - _"Edamam API"_.
 public extension Endpoint {
     /// Endpoint for 20 random recipes.
     /// - Returns: `Endpoint` instance.
@@ -17,7 +17,6 @@ public extension Endpoint {
                         paratemets: ["type": "public",
                                      "app_id": appId,
                                      "app_key": apiKey,
-                                     "random": "\(true)",
                                      "q": keywords.randomElement() ?? "chichen"]
         )
     }
@@ -34,7 +33,7 @@ public extension Endpoint {
         )
     }
     
-    /// Creates endpoint with provided keyword and **filters**
+    /// Creates endpoint with provided keyword and **filters**.
     /// - Parameters:
     ///   - keyword: keyword to find (required)
     ///   - meals: meal types
