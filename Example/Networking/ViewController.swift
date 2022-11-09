@@ -32,7 +32,9 @@ class ViewController: UIViewController {
                     self.textView.text = "\(response)"
                 }
             case .failure(let error):
-                textView.text = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.textView.text = error.localizedDescription
+                }
             }
         }
     }

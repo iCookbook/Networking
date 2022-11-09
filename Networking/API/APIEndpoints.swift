@@ -10,20 +10,21 @@ import Models
 /// Here you can see endpoints for current API - _"Edamam API"_
 public extension Endpoint {
     /// Endpoint for 20 random recipes.
-    /// Random is done on random choosing keyword that is required for this API. So, it is not impossible to get true random recipes.
-    /// - Returns: `Endpoint` instance
+    /// - Returns: `Endpoint` instance.
+    /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
     static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
                                      "app_id": appId,
                                      "app_key": apiKey,
+                                     "random": "\(true)",
                                      "q": keywords.randomElement() ?? "chichen"]
         )
     }
     
-    /// Creates endpoint with provided keyword
-    /// - Parameter keyword: keyword to find (required)
-    /// - Returns: `Endpoint` instance
+    /// Creates endpoint with provided keyword.
+    /// - Parameter keyword: keyword to find (required).
+    /// - Returns: `Endpoint` instance.
     static func create(by keyword: String) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
