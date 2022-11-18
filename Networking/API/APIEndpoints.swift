@@ -10,7 +10,9 @@ import Models
 /// Here you can see endpoints for current API - _"Edamam API"_.
 public extension Endpoint {
     /// Endpoint for 20 random recipes.
-    /// - Returns: `Endpoint` instance.
+    ///
+    /// - Returns: ``Endpoint`` instance.
+    ///
     /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
     static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
@@ -21,7 +23,24 @@ public extension Endpoint {
         )
     }
     
+    /// Endpoint for 20 random recipes by provided `Cuisine`.
+    ///
+    /// - Parameter category: cuisine to concrete random.
+    /// - Returns: ``Endpoint`` instance.
+    ///
+    /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
+    static func random(by category: Cuisine) -> Self {
+        return Endpoint(path: "api/recipes/v2",
+                        paratemets: ["type": "public",
+                                     "app_id": appId,
+                                     "app_key": apiKey,
+                                     "cuisineType": category.rawValue,
+                                     "q": keywords.randomElement() ?? "chichen"]
+        )
+    }
+    
     /// Creates endpoint with provided keyword.
+    ///
     /// - Parameter keyword: keyword to find (required).
     /// - Returns: `Endpoint` instance.
     static func create(by keyword: String) -> Self {
@@ -34,6 +53,7 @@ public extension Endpoint {
     }
     
     /// Creates endpoint with provided keyword and **filters**.
+    ///
     /// - Parameters:
     ///   - keyword: keyword to find (required)
     ///   - meals: meal types

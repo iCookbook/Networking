@@ -6,6 +6,8 @@
 //
 
 /// Type-safe HTTP-status codes.
+///
+/// All codes are self-describing.
 enum HTTPStatusCode: Int {
     case unknown = -1
     

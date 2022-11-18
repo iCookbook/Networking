@@ -10,13 +10,13 @@ import Foundation
 /// Defines network request.
 public struct NetworkRequest {
     /// Endpoint for request.
-    var endpoint: EndpointProtocol
+    let endpoint: EndpointProtocol
     /// Type-safe HTTP method.
-    var method: HTTPMethod = .get
+    let method: HTTPMethod
     /// Type-safe HTTP headers.
-    var httpHeaderFields: [HTTPHeader] = []
+    let httpHeaderFields: [HTTPHeader]
     /// The timeout interval of the request.
-    var timeoutInterval: TimeInterval = 5
+    let timeoutInterval: TimeInterval
     
     // MARK: - Init
     

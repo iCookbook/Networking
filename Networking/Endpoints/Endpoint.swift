@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// An endpoint is an access to a route by a separate HTTP method. The endpoint performs a specific task, accepts parameters and returns data to the Client.
+/// An endpoint is an access to a route by a separate HTTP method. The endpoint performs a specific task, accepts parameters and returns data to the client.
 public struct Endpoint: EndpointProtocol {
     /// Application ID of the API.
     static let appId = "d6544fa1"
@@ -30,5 +30,5 @@ public struct Endpoint: EndpointProtocol {
     }
     
     /// Keywords for randomize search results. `q` is required quote for Edamam API, so it is being used to randomize getting data.
-    static let keywords = ["chicken", "beef", "mushroom", "cheese", "pepperoni", "pepper", "garlic", "basil", "onion", "salami", "bacon", "shrimps", "fish", "anchovies", "pepper", "olives", "meat", "veal", "lamb", "pig", "meatballs", "turkey"]
+    static let keywords = ["chicken", "beef", "mushroom", "cheese", "pepperoni", "pepper", "garlic", "basil", "onion", "salami", "bacon", "shrimps", "fish", "anchovies", "pepper", "olives", "meat", "veal", "lamb", "meatballs", "turkey"]
 }

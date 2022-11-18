@@ -7,9 +7,10 @@
 
 import Models
 
-/// Wrappers over requests for ``NetworkManager``
+/// Wrappers over requests for ``NetworkManager``.
 public extension NetworkManager {
-    /// Provides ``Reponse`` from the server.
+    /// Provides `Reponse` from the server.
+    /// 
     /// - Parameters:
     ///   - request: ``NetworkRequest`` instance with all info about the request.
     ///   - completion: completion handler with `Result` enum.

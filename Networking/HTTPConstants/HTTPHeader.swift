@@ -7,22 +7,35 @@
 
 import Foundation
 
-/// Type-safe HTTP-header
+/// Type-safe HTTP-header.
 public struct HTTPHeader: Hashable {
+    
+    // MARK: - Public Properties
+    
+    /// Header's name.
     public let name: String
+    /// Value of the header.
     public let value: String
     
+    // MARK: - Init
+    
+    /// Creates instance of HTTP header.
     public init(name: String, value: String) {
         self.name = name
         self.value = value
     }
 }
 
+// MARK: - CustomStringConvertible
+
 extension HTTPHeader: CustomStringConvertible {
+    /// Simplifies the use of this struct by converting it to the following string.
     public var description: String {
         "\(name): \(value)"
     }
 }
+
+// MARK: - HTTP headers' wrappers
 
 public extension HTTPHeader {
     static func accept(_ value: String) -> HTTPHeader {
