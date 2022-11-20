@@ -57,17 +57,29 @@ public final class NetworkManager: NetworkManagerProtocol {
             /// `[weak self]` - creating a **weak** reference to `self`, thereby avoiding reference-cycle/crash
             /// Then we create a `strongSelf` - a strong reference to `self` inside the block, so we guarantee that the block will be executed to the end, since the instance of the class will not be able to reset, and we also avoid problems with optionals
             guard let strongSelf = self else {
-                completion(.failure(NetworkManagerError.retainCycle))
+                completion(.failure(.retainCycle))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse,
+                  let statusCode = HTTPStatusCode(rawValue: response.statusCode)
+            else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard statusCode.isSuccessful else {
+                completion(.failure(.unsuccessfulStatusCode(statusCode)))
                 return
             }
             
             guard error == nil, let data = data else {
-                completion(.failure(NetworkManagerError.networkError(error!))) // we are sure error != nil
+                completion(.failure(.networkError(error!))) // we are sure error != nil
                 return
             }
             
             guard let model = try? strongSelf.decoder.decode(Model.self, from: data) else {
-                completion(.failure(NetworkManagerError.parsingJSONError))
+                completion(.failure(.parsingJSONError))
                 return
             }
             
@@ -83,7 +95,7 @@ public final class NetworkManager: NetworkManagerProtocol {
     /// - Parameters:
     ///   - urlString: simple string url.
     ///   - completion: completion handler that has `Result` enum with `Data` (success) and ``NetworkManagerError`` (failure) paratemets.
-    ///   
+    ///
     /// - Note: It has `class` for providing access to `UIImageView` instances ability to download an image.
     public class func obtainData(by urlString: String, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
         
