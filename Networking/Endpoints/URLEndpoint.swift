@@ -18,12 +18,14 @@ public struct URLEndpoint: EndpointProtocol {
     
     // MARK: - Public Properties
     
+    /// Endpoint's url for request.
     public var url: URL? {
         URL(string: urlString)
     }
     
     // MARK: - Init
     
+    /// Creates ``URLEndpoint`` instance with provided url (`String`).
     public init(urlString: String) {
         self.urlString = urlString
     }

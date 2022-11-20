@@ -7,6 +7,7 @@
 
 import Models
 
+/// Abstraction over any network manager.
 public protocol NetworkManagerProtocol {
     /// Provides `Reponse` from the server.
     ///
@@ -33,6 +34,7 @@ public final class NetworkManager: NetworkManagerProtocol {
     }
     
     /// Performs getting data from the Internet and then decoding it with provided generic-type.
+    ///
     /// - Parameters:
     ///   - request: instance of ``NetworkRequest`` that has endpoint and type-safe HTTP-method and -headers for a request.
     ///   - completion: completion handler that has `Result` enum with generic `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
