@@ -17,9 +17,9 @@ public extension Endpoint {
     static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
-                                     "app_id": appId,
-                                     "app_key": apiKey,
-                                     "q": keywords.randomElement() ?? "chichen"]
+                                     "app_id": Credentials.appId,
+                                     "app_key": Credentials.apiKey,
+                                     "q": keywords.randomElement() ?? "chicken"]
         )
     }
     
@@ -32,22 +32,22 @@ public extension Endpoint {
     static func random(by category: Cuisine) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
-                                     "app_id": appId,
-                                     "app_key": apiKey,
+                                     "app_id": Credentials.appId,
+                                     "app_key": Credentials.apiKey,
                                      "cuisineType": category.rawValue,
-                                     "q": keywords.randomElement() ?? "chichen"]
+                                     "q": keywords.randomElement() ?? "chicken"]
         )
     }
     
     /// Creates endpoint with provided keyword.
     ///
     /// - Parameter keyword: keyword to find (required).
-    /// - Returns: `Endpoint` instance.
+    /// - Returns: ``Endpoint`` instance.
     static func create(by keyword: String) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
-                                     "app_id": appId,
-                                     "app_key": apiKey,
+                                     "app_id": Credentials.appId,
+                                     "app_key": Credentials.apiKey,
                                      "q": keyword]
         )
     }
@@ -60,12 +60,12 @@ public extension Endpoint {
     ///   - diets: diet types
     ///   - cuisines: world cuisines
     ///   - dishes: dish types
-    /// - Returns: `Endpoint` instance
+    /// - Returns: ``Endpoint`` instance
     static func create(by keyword: String, meals: [Meal] = [], diets: [Diet] = [], cuisines: [Cuisine] = [], dishes: [Dish] = []) -> Self {
         return Endpoint(path: "api/recipes/v2",
                         paratemets: ["type": "public",
-                                     "app_id": appId,
-                                     "app_key": apiKey,
+                                     "app_id": Credentials.appId,
+                                     "app_key": Credentials.apiKey,
                                      "q": keyword,
                                      "diet": "high-fiber",
                                      "cuisineType": "American",

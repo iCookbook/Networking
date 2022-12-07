@@ -11,11 +11,20 @@ import Models
 public protocol NetworkManagerProtocol {
     /// Provides `Reponse` from the server.
     ///
-    /// This method was implemented in `API/APIRequests.swift`.
-    func getResponse(request: NetworkRequest, completion: @escaping (Result<Response, NetworkManagerError>) -> Void)
+    /// - Parameters:
+    ///   - request: ``NetworkRequest`` instance with all info about the request.
+    ///   - completion: completion handler with `Result` enum.
+    func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void)
+    
+    /// Gets `Data` from the server.
+    ///
+    /// - Parameters:
+    ///   - urlString: link to the source of data.
+    ///   - completion: completion handler with `Result` enum.
+    func obtainData(request: NetworkRequest, completion: @escaping (Result<Data, NetworkManagerError>) -> Void)
 }
 
-/// Class responsible for networking.
+/// An object responsible for networking.
 public final class NetworkManager: NetworkManagerProtocol {
     
     // MARK: - Private Properties
@@ -38,7 +47,7 @@ public final class NetworkManager: NetworkManagerProtocol {
     /// - Parameters:
     ///   - request: instance of ``NetworkRequest`` that has endpoint and type-safe HTTP-method and -headers for a request.
     ///   - completion: completion handler that has `Result` enum with generic `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
-    func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
+    public func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
         
         guard let url = request.endpoint.url else {
             completion(.failure(NetworkManagerError.invalidURL))
@@ -54,8 +63,9 @@ public final class NetworkManager: NetworkManagerProtocol {
         let dataTask = session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
             
             /// We use the capture list in order to avoid reference-cycle or/and application crashes.
-            /// `[weak self]` - creating a **weak** reference to `self`, thereby avoiding reference-cycle/crash
-            /// Then we create a `strongSelf` - a strong reference to `self` inside the block, so we guarantee that the block will be executed to the end, since the instance of the class will not be able to reset, and we also avoid problems with optionals
+            /// `[weak self]` - creating a **weak** reference to `self`, thereby avoiding reference-cycle/crash.
+            /// Then we create a `strongSelf` - a strong reference to `self` inside the block, so we guarantee
+            /// the block will be executed to the end, since the instance of the class will not be able to reset, and we also avoid problems with optionals.
             guard let strongSelf = self else {
                 completion(.failure(.retainCycle))
                 return
@@ -79,7 +89,7 @@ public final class NetworkManager: NetworkManagerProtocol {
             }
             
             guard let model = try? strongSelf.decoder.decode(Model.self, from: data) else {
-                completion(.failure(.parsingJSONError))
+                completion(.failure(.decodingError))
                 return
             }
             
@@ -88,28 +98,35 @@ public final class NetworkManager: NetworkManagerProtocol {
         dataTask.resume()
     }
     
-    // MARK: - Public Methods
-    
-    /// Gets data from provided URL.
-    ///
-    /// - Parameters:
-    ///   - urlString: simple string url.
-    ///   - completion: completion handler that has `Result` enum with `Data` (success) and ``NetworkManagerError`` (failure) paratemets.
-    ///
-    /// - Note: It has `class` for providing access to `UIImageView` instances ability to download an image.
-    public class func obtainData(by urlString: String, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
+    public func obtainData(request: NetworkRequest, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
         
-        guard let url = URL(string: urlString) else {
+        guard let url = request.endpoint.url else {
             completion(.failure(NetworkManagerError.invalidURL))
             return
         }
         
-        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 3)
+        var urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: request.timeoutInterval)
+        urlRequest.httpMethod = request.method.rawValue
+        urlRequest.allHTTPHeaderFields = request.httpHeaderFields.reduce(into: [String: String](), { partialResult, header in
+            partialResult[header.name, default: ""] = header.value
+        })
         
-        let dataTask = URLSession.shared.dataTask(with: urlRequest, completionHandler: { data, response, error in
+        let dataTask = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
+            
+            guard let response = response as? HTTPURLResponse,
+                  let statusCode = HTTPStatusCode(rawValue: response.statusCode)
+            else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard statusCode.isSuccessful else {
+                completion(.failure(.unsuccessfulStatusCode(statusCode)))
+                return
+            }
             
             guard error == nil, let data = data else {
-                completion(.failure(NetworkManagerError.networkError(error!))) // we are sure error != nil
+                completion(.failure(.networkError(error!))) // we are sure error != nil
                 return
             }
             
@@ -118,4 +135,3 @@ public final class NetworkManager: NetworkManagerProtocol {
         dataTask.resume()
     }
 }
-

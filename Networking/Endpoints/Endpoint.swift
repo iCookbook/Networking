@@ -28,10 +28,6 @@ public struct Endpoint: EndpointProtocol {
     
     // MARK: - Static Properties
     
-    /// Application ID of the API.
-    static let appId = "d6544fa1"
-    /// API key/token.
-    static let apiKey = "46ffea991d22cd980b515e373b4b852a"
     /// Keywords for randomize search results. Quote `q` is required for Edamam API, so this property is being used to randomize getting data.
     static let keywords = ["chicken", "beef", "mushroom", "cheese", "pepperoni", "pepper", "garlic", "basil", "onion", "salami", "bacon", "shrimps", "fish", "anchovies", "pepper", "olives", "meat", "veal", "lamb", "meatballs", "turkey", "apple", "pizza", "pasta", "potato", "tomato", "milk", "burger", "cucumber", "soup", "cake", "pumpkin", "sandwich", "hamburger"]
 }

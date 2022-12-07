@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         
         let request = NetworkRequest(endpoint: Endpoint.random())
-        networkManager.getResponse(request: request) { [unowned self] (result) in
+        networkManager.perform(request: request) { [unowned self] (result: Result<Response, NetworkManagerError>) in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
