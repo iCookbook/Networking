@@ -9,11 +9,11 @@ import Models
 
 /// Abstraction over any network manager.
 public protocol NetworkManagerProtocol {
-    /// Provides `Reponse` from the server.
+    /// Performs getting data from the Internet and then decoding it with provided generic-type.
     ///
     /// - Parameters:
-    ///   - request: ``NetworkRequest`` instance with all info about the request.
-    ///   - completion: completion handler with `Result` enum.
+    ///   - request: contains all required information for the request.
+    ///   - completion: completion handler that has `Result` enum with generic `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
     func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void)
     
     /// Gets `Data` from the server.
@@ -45,8 +45,8 @@ public final class NetworkManager: NetworkManagerProtocol {
     /// Performs getting data from the Internet and then decoding it with provided generic-type.
     ///
     /// - Parameters:
-    ///   - request: instance of ``NetworkRequest`` that has endpoint and type-safe HTTP-method and -headers for a request.
-    ///   - completion: completion handler that has `Result` enum with generic `Model` (success) and ``NetworkManagerError`` (failure) paratemets.
+    ///   - request: contains all required information for the request.
+    ///   - completion: completion handler with `Result` enum.
     public func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void) {
         
         guard let url = request.endpoint.url else {
@@ -83,12 +83,14 @@ public final class NetworkManager: NetworkManagerProtocol {
                 return
             }
             
-            guard error == nil, let data = data else {
-                completion(.failure(.networkError(error!))) // we are sure error != nil
+            if let error = error {
+                completion(.failure(.networkError(error)))
                 return
             }
             
-            guard let model = try? strongSelf.decoder.decode(Model.self, from: data) else {
+            guard let data = data,
+                  let model = try? strongSelf.decoder.decode(Model.self, from: data)
+            else {
                 completion(.failure(.decodingError))
                 return
             }
@@ -98,6 +100,11 @@ public final class NetworkManager: NetworkManagerProtocol {
         dataTask.resume()
     }
     
+    /// Gets `Data` from the server.
+    ///
+    /// - Parameters:
+    ///   - urlString: link to the source of data.
+    ///   - completion: completion handler with `Result` enum.
     public func obtainData(request: NetworkRequest, completion: @escaping (Result<Data, NetworkManagerError>) -> Void) {
         
         guard let url = request.endpoint.url else {
@@ -113,20 +120,13 @@ public final class NetworkManager: NetworkManagerProtocol {
         
         let dataTask = session.dataTask(with: urlRequest, completionHandler: { data, response, error in
             
-            guard let response = response as? HTTPURLResponse,
-                  let statusCode = HTTPStatusCode(rawValue: response.statusCode)
-            else {
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            guard let data = data else {
                 completion(.failure(.invalidResponse))
-                return
-            }
-            
-            guard statusCode.isSuccessful else {
-                completion(.failure(.unsuccessfulStatusCode(statusCode)))
-                return
-            }
-            
-            guard error == nil, let data = data else {
-                completion(.failure(.networkError(error!))) // we are sure error != nil
                 return
             }
             

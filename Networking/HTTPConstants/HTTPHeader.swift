@@ -5,8 +5,6 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
-import Foundation
-
 /// Type-safe HTTP-header.
 public struct HTTPHeader: Hashable {
     

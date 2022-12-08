@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Networking'
-  s.version          = '2.2.0'
+  s.version          = '2.2.2'
   s.summary          = 'Layer responsible for all networking of the application.'
   s.homepage         = 'https://github.com/iCookbook/Networking'
   s.author           = { 'htmlprogrammist' => '60363270+htmlprogrammist@users.noreply.github.com' }
