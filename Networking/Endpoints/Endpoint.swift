@@ -12,7 +12,7 @@ public struct Endpoint: EndpointProtocol {
     /// Path to an endpoint.
     let path: String
     /// Parameters for an endpoint.
-    var parameters: [String: String] = [:]
+    var parameters = [(String, String)]()
     
     // MARK: - Public Properties
     
@@ -22,7 +22,7 @@ public struct Endpoint: EndpointProtocol {
         components.scheme = "https"
         components.host = "api.edamam.com"
         components.path = "/" + path
-        components.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        components.queryItems = parameters.map { URLQueryItem(name: $0.0, value: $0.1) }
         return components.url
     }
     

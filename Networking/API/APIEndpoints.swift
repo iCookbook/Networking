@@ -16,10 +16,10 @@ public extension Endpoint {
     /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
     static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
-                        parameters: ["type": "public",
-                                     "app_id": Credentials.appId,
-                                     "app_key": Credentials.apiKey,
-                                     "q": keywords.randomElement() ?? "chicken"]
+                        parameters: [("type", "public"),
+                                     ("app_id", Credentials.appId),
+                                     ("app_key", Credentials.apiKey),
+                                     ("q", keywords.randomElement() ?? "chicken")]
         )
     }
     
@@ -31,11 +31,11 @@ public extension Endpoint {
     /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
     static func random(by category: String) -> Self {
         return Endpoint(path: "api/recipes/v2",
-                        parameters: ["type": "public",
-                                     "app_id": Credentials.appId,
-                                     "app_key": Credentials.apiKey,
-                                     "cuisineType": category,
-                                     "q": keywords.randomElement() ?? "chicken"]
+                        parameters: [("type", "public"),
+                                     ("app_id", Credentials.appId),
+                                     ("app_key", Credentials.apiKey),
+                                     ("cuisineType", category),
+                                     ("q", keywords.randomElement() ?? "chicken")]
         )
     }
     
@@ -47,18 +47,22 @@ public extension Endpoint {
     ///   - diets: diet types
     ///   - cuisines: world cuisines
     ///   - dishes: dish types
-    ///   
+    ///
     /// - Returns: ``Endpoint`` instance
-    static func create(by keyword: String, meals: String?, diets: String?, cuisines: String?, dishes: String?) -> Self {
-        var parameters = ["type": "public",
-                          "app_id": Credentials.appId,
-                          "app_key": Credentials.apiKey,
-                          "q": keyword]
+    static func create(by keyword: String,
+                       meals: [(String, String)],
+                       diets: [(String, String)],
+                       cuisines: [(String, String)],
+                       dishes: [(String, String)]) -> Self {
+        var parameters = [("type", "public"),
+                          ("app_id", Credentials.appId),
+                          ("app_key", Credentials.apiKey),
+                          ("q", keywords.randomElement() ?? "chicken")]
         
-        parameters["mealType"] = meals
-        parameters["diet"] = diets
-        parameters["cuisineType"] = cuisines
-        parameters["dishType"] = dishes
+        parameters.append(contentsOf: meals)
+        parameters.append(contentsOf: diets)
+        parameters.append(contentsOf: cuisines)
+        parameters.append(contentsOf: dishes)
         
         return Endpoint(path: "api/recipes/v2",
                         parameters: parameters)
