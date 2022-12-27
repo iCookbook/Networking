@@ -8,7 +8,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '12.0'
   s.swift_version = '5.0'
-
   s.source_files = 'Networking/**/*.{swift}'
-  s.dependency 'Models'
 end

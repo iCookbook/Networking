@@ -5,7 +5,7 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
-import Models
+import Foundation
 
 /// Here you can see endpoints for current API - _"Edamam API"_.
 public extension Endpoint {
@@ -16,7 +16,7 @@ public extension Endpoint {
     /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
     static func random() -> Self {
         return Endpoint(path: "api/recipes/v2",
-                        paratemets: ["type": "public",
+                        parameters: ["type": "public",
                                      "app_id": Credentials.appId,
                                      "app_key": Credentials.apiKey,
                                      "q": keywords.randomElement() ?? "chicken"]
@@ -29,30 +29,17 @@ public extension Endpoint {
     /// - Returns: ``Endpoint`` instance.
     ///
     /// - Note: Random is done on random choosing keyword that is required for this API and `random` from this API.
-    static func random(by category: Cuisine) -> Self {
+    static func random(by category: String) -> Self {
         return Endpoint(path: "api/recipes/v2",
-                        paratemets: ["type": "public",
+                        parameters: ["type": "public",
                                      "app_id": Credentials.appId,
                                      "app_key": Credentials.apiKey,
-                                     "cuisineType": category.rawValue,
+                                     "cuisineType": category,
                                      "q": keywords.randomElement() ?? "chicken"]
         )
     }
     
-    /// Creates endpoint with provided keyword.
-    ///
-    /// - Parameter keyword: keyword to find (required).
-    /// - Returns: ``Endpoint`` instance.
-    static func create(by keyword: String) -> Self {
-        return Endpoint(path: "api/recipes/v2",
-                        paratemets: ["type": "public",
-                                     "app_id": Credentials.appId,
-                                     "app_key": Credentials.apiKey,
-                                     "q": keyword]
-        )
-    }
-    
-    /// Creates endpoint with provided keyword and **filters**.
+    /// Creates endpoint with provided keyword and optional filters.
     ///
     /// - Parameters:
     ///   - keyword: keyword to find (required)
@@ -60,17 +47,20 @@ public extension Endpoint {
     ///   - diets: diet types
     ///   - cuisines: world cuisines
     ///   - dishes: dish types
+    ///   
     /// - Returns: ``Endpoint`` instance
-    static func create(by keyword: String, meals: [Meal] = [], diets: [Diet] = [], cuisines: [Cuisine] = [], dishes: [Dish] = []) -> Self {
+    static func create(by keyword: String, meals: String?, diets: String?, cuisines: String?, dishes: String?) -> Self {
+        var parameters = ["type": "public",
+                          "app_id": Credentials.appId,
+                          "app_key": Credentials.apiKey,
+                          "q": keyword]
+        
+        parameters["mealType"] = meals
+        parameters["diet"] = diets
+        parameters["cuisineType"] = cuisines
+        parameters["dishType"] = dishes
+        
         return Endpoint(path: "api/recipes/v2",
-                        paratemets: ["type": "public",
-                                     "app_id": Credentials.appId,
-                                     "app_key": Credentials.apiKey,
-                                     "q": keyword,
-                                     "diet": "high-fiber",
-                                     "cuisineType": "American",
-                                     "mealType": "Dinner",
-                                     "dishType": "Biscuits%20and%20cookies"]
-        )
+                        parameters: parameters)
     }
 }

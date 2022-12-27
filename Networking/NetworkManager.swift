@@ -5,8 +5,6 @@
 //  Created by Егор Бадмаев on 30.10.2022.
 //
 
-import Models
-
 /// Abstraction over any network manager.
 public protocol NetworkManagerProtocol {
     /// Performs getting data from the Internet and then decoding it with provided generic-type.
@@ -37,7 +35,7 @@ public final class NetworkManager: NetworkManagerProtocol {
     // MARK: - Init
     
     /// Creates a network manager with the specified `URLSession` and optional `JSONDecoder`.
-    public init(session: URLSession, decoder: JSONDecoder = JSONDecoder()) {
+    public init(session: URLSession, decoder: JSONDecoder) {
         self.session = session
         self.decoder = decoder
     }
