@@ -9,6 +9,7 @@ import Foundation
 
 /// Here you can see endpoints for current API - _"Edamam API"_.
 public extension Endpoint {
+    
     /// Endpoint for 20 random recipes.
     ///
     /// - Returns: ``Endpoint`` instance.
@@ -57,7 +58,7 @@ public extension Endpoint {
         var parameters = [("type", "public"),
                           ("app_id", Credentials.appId),
                           ("app_key", Credentials.apiKey),
-                          ("q", keywords.randomElement() ?? "chicken")]
+                          ("q", keyword)]
         
         parameters.append(contentsOf: meals)
         parameters.append(contentsOf: diets)

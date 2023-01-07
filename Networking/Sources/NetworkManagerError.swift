@@ -20,3 +20,17 @@ public enum NetworkManagerError: Error {
     /// Error on parsing JSON with decoder.
     case decodingError
 }
+
+extension NetworkManagerError: Equatable {
+    
+    public static func == (lhs: NetworkManagerError, rhs: NetworkManagerError) -> Bool {
+        switch (lhs, rhs) {
+        case (let .unsuccessfulStatusCode(lhsCode), let .unsuccessfulStatusCode(rhsCode)):
+            return lhsCode.rawValue == rhsCode.rawValue
+        case (let .networkError(lhsError), let .networkError(rhsError)):
+            return lhsError.localizedDescription == rhsError.localizedDescription
+        default:
+            return lhs.localizedDescription == rhs.localizedDescription
+        }
+    }
+}
