@@ -30,7 +30,7 @@ extension NetworkManagerError: Equatable {
         case (let .networkError(lhsError), let .networkError(rhsError)):
             return lhsError.localizedDescription == rhsError.localizedDescription
         default:
-            return lhs.localizedDescription == rhs.localizedDescription
+            return lhs.self == rhs.self
         }
     }
 }

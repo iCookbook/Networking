@@ -69,6 +69,11 @@ public final class NetworkManager: NetworkManagerProtocol {
                 return
             }
             
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
             guard let response = response as? HTTPURLResponse,
                   let statusCode = HTTPStatusCode(rawValue: response.statusCode)
             else {
@@ -78,11 +83,6 @@ public final class NetworkManager: NetworkManagerProtocol {
             
             guard statusCode.isSuccessful else {
                 completion(.failure(.unsuccessfulStatusCode(statusCode)))
-                return
-            }
-            
-            if let error = error {
-                completion(.failure(.networkError(error)))
                 return
             }
             
